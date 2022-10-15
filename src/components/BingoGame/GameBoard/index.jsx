@@ -1,6 +1,6 @@
 import React from "react";
 
-const Game = ({constants}) => {
+const GameBoard = ({constants}) => {
     return (
         <div >
             {constants.map(({ value, selected }, index) => {
@@ -10,4 +10,4 @@ const Game = ({constants}) => {
     );
 };
 
-export default Game;
+export default GameBoard;

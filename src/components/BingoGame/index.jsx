@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import shuffle from "shuffle-array";
-import Game from "./Game";
-import quotes from "../constants/quotes";
+import Game from "./GameBoard";
+import quotes from "../../constants/quotes";
 
-function App() {
+function BingoGame() {
     const [gameConstants, setGameConstants] = useState([]);
 
     const initialize = () => {
@@ -30,4 +30,4 @@ function App() {
   );
 }
 
-export default App;
+export default BingoGame;
