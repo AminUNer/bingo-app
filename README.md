@@ -1,11 +1,12 @@
-## Getting Started with Create React BingoBeer App
+## Bingo Beer App
 
 #### A project that allows you to show a bingo board and play the bingo game with the beer context.
 
 #### This project use external libraries such as shuffle-array.
 
-#### The bingo app includes a structured react project architecture.
+#### The bingo app includes a structured project architecture along with a vercel deployment config file.
 
+#### [Demo](https://bingo-app-ivory.vercel.app/)
 
 
 ## Production build
