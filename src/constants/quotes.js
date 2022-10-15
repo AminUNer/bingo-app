@@ -8,7 +8,7 @@ const quotes = [
     "Many battles have been fought and won by soldiers nourished on beer",
     "Beer is proof that God loves us and wants us to be happy",
     "Most people hate the taste of beer to begin with. It is, however, a prejudice",
-    "PI’ve only been in love with a beer bottle and a mirror",
+    "I’ve only been in love with a beer bottle and a mirror",
     "Beauty is in the eye of the beer holder",
     "24 hours in a day, 24 beers in a case. Coincidence?",
     "A man who lies about beer makes enemies",
