@@ -31,6 +31,7 @@ function BingoGame() {
     const triggerVictory = useCallback(
         () => {
             setIsWinner(true);
+            setTimeout(() => setIsWinner(false), 2000);
         },
         [],
     );
