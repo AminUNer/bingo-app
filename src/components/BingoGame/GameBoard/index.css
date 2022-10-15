@@ -1,4 +1,3 @@
-
 .container .game-board {
     display: flex;
     flex-direction: row;
@@ -54,8 +53,11 @@
 }
 
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 950px) {
     .container .game-board .cell {
-        font-size: 2.5vw;
+        font-size: 1.5vw;
+    }
+    .container .game-board .cell .number {
+        font-size: 2vw;
     }
 }
