@@ -102,7 +102,7 @@ function BingoGame() {
     };
 
   return (
-    <div className="container" >
+    <div className="container">
         {
             isWinner && (
                 <img
@@ -113,7 +113,10 @@ function BingoGame() {
                 />
             )
         }
-      <GameBoard constants={board} select={selectCell}/>
+        <GameBoard constants={board} select={selectCell}/>
+        <button className="reload" onClick={initialize}>
+            Reload Game
+        </button>
     </div>
   );
 }
