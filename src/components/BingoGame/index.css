@@ -29,3 +29,7 @@
     color: #ffffff;
 }
 
+.winner-gif {
+    position: absolute;
+    margin-top: 9rem;
+}

@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import shuffle from "shuffle-array";
 import quotes from "../../constants/quotes";
 import GameBoard from "./GameBoard";
 import './index.css';
 
 function BingoGame() {
-    const [gameConstants, setGameConstants] = useState([]);
+    const [board, setBoard] = useState([]);
     const [isWinner, setIsWinner] = useState(false);
     const [bingoSelector, setBingoSelector] = useState([]);
 
@@ -19,7 +19,7 @@ function BingoGame() {
             ],
             []
         );
-        setGameConstants(data);
+        setBoard(data);
         setBingoSelector(new Array(12).fill(false));
         setIsWinner(false);
     };
@@ -28,73 +28,75 @@ function BingoGame() {
         initialize();
     }, []);
 
+    const triggerVictory = useCallback(
+        () => {
+            setIsWinner(true);
+        },
+        [],
+    );
+    
     const checkWinner = () => {
-        console.log(bingoSelector);
-        if (!gameConstants.length) return;
+        // console.log(bingoSelector);
+        if (!board.length) return;
 
-        // Test selected ligne
-        if (
-            gameConstants[0,4].selected &&
-
-            !gameConstants[0]
-        ) {
-            gameConstants[0] = true;
-
-
-            setIsWinner(true);
-            console.log(gameConstants[0].selected);
-            console.log(bingoSelector[0]);
+        //  Select diagonal with bingoSelector 10
+        if (!bingoSelector[10]) {
+            let j = 0;
+            while (j <= 24 && board[j].selected) {
+                j += 6;
+            }
+            if (j === 30) {
+                bingoSelector[10] = true;
+                triggerVictory();
+            }
+        }
+        //  Select diagonal with bingoSelector 11
+        if (!bingoSelector[11]) {
+            let j = 4;
+            while (j <= 20 && board[j].selected) {
+                j += 4;
+            }
+            if (j === 24) {
+                bingoSelector[11] = true;
+                triggerVictory();
+            }
         }
 
-        if (
-            gameConstants[5,9].selected &&
-
-            !bingoSelector[1]
-        ) {
-            bingoSelector[1] = true;
+        for (let i = 0; i < 5; i++) {
+            //  Select from column
+            if (!bingoSelector[i + 5]) {
+                let j = i;
+                while (j <= i + 20 && board[j].selected) {
+                    j += 5;
+                }
+                if (j === i + 25) {
+                    bingoSelector[i + 5] = true;
+                    triggerVictory();
+                }
+            }
+            //  Select from row
+            if (!bingoSelector[i]) {
+                let j = i * 5;
+                while (j <= i * 5 + 4 && board[j].selected) {
+                    j++;
+                }
+                if (j === i * 5 + 5) {
+                    bingoSelector[i] = true;
+                    triggerVictory();
+                }
+            }
+        }
+        //  Set Victory "you won"
+        if (board.every((val) => val.selected === true)) {
             setIsWinner(true);
         }
-        if (
-            gameConstants[10,14].selected &&
-
-            !bingoSelector[2]
-        ) {
-            bingoSelector[2] = true;
-            setIsWinner(true);
-        }
-        if (
-            gameConstants[15,19].selected &&
-
-            !bingoSelector[3]
-        ) {
-            bingoSelector[3] = true;
-            setIsWinner(true);
-        }
-
-        if (
-            gameConstants[20,24].selected &&
-
-            !bingoSelector[4]
-        ) {
-            bingoSelector[4] = true;
-            setIsWinner(true);
-        }
-
-
-
-        if (gameConstants.every((val) => val.selected === true)) {
-            setIsWinner(true);
-        }
-        // else {
-        //    setIsWinner(false);
-        // }
     };
 
     const selectCell = (index) => {
         // if (isWinner) return;
-        let newBoard = [...gameConstants];
-        newBoard[index].selected = index !== 12 ? !gameConstants[index].selected : true;
-        setGameConstants(newBoard);
+        let newBoard = [...board];
+        newBoard[index].selected = index !== 12 ? !board[index].selected : true;
+        setBoard(newBoard);
         checkWinner()
     };
 
@@ -102,10 +104,15 @@ function BingoGame() {
     <div className="container" >
         {
             isWinner && (
-                console.log('WINNER')
+                <img
+                    className="winner-gif"
+                    src="https://media3.giphy.com/media/t2sKa4JKNW9DawxAYi/giphy.gif?cid=790b76118fa06a57ca932261ed49e803d67b4dc6ce100df2&rid=giphy.gif&ct=g"
+                    alt="Cheers"
+                    width="500"
+                />
             )
         }
-      <GameBoard constants={gameConstants} select={selectCell}/>
+      <GameBoard constants={board} select={selectCell}/>
     </div>
   );
 }
