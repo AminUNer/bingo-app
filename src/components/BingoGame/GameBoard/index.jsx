@@ -1,11 +1,20 @@
 import React from "react";
+import './index.css';
 
-const GameBoard = ({constants}) => {
+const GameBoard = ({constants, select}) => {
     return (
-        <div >
-            {constants.map(({ value, selected }, index) => {
-                return console.log(index, value, selected);
-            })}
+        <div className="game-board">
+            {constants.map(({ value, selected }, index) => (
+                <button
+                    key={`${value}-${selected}`}
+                    name={`${value}-${selected}`}
+                    className={`cell ${selected ? "selected" : ""}`}
+                    onClick={() => select(index)}
+                >
+                    <span className="number">{index + 1}</span>
+                    <span>{value}</span>
+                </button>
+            ))}
         </div>
     );
 };
